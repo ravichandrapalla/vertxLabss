@@ -1,6 +1,6 @@
 import "./App.css";
 import GlobalLayout from "./Layout";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/ActiveaPage";
 
 function App() {
   return (
