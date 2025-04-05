@@ -1,11 +1,11 @@
 import "./App.css";
 import GlobalLayout from "./Layout";
-import Dashboard from "./pages/ActiveaPage";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <GlobalLayout>
-      <Dashboard />
+      <MainPage />
     </GlobalLayout>
   );
 }

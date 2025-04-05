@@ -6,7 +6,7 @@ import { BsBell } from "react-icons/bs";
 import { TbTopologyStar3 } from "react-icons/tb";
 import { RiLineChartLine } from "react-icons/ri";
 
-const BottomNavigation = ({ isActive }) => {
+const BottomNavigation = ({ isActive = true }) => {
   return (
     <div className="flex items-center justify-around py-3 bg-black border-t border-gray-800">
       <Link
