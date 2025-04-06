@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { IN, US, CA, AE } from "country-flag-icons/react/3x2";
 import World from "../../../public/World.png";
+import Dropdown from "../ui/Dropdown";
 
 const getFlag = (param) => {
   switch (param) {
@@ -22,38 +23,78 @@ const getFlag = (param) => {
   }
 };
 
-const DemographicsCard = () => {
+const DemographicsCard = ({
+  demographicType,
+  demographicOptions,
+  mockData,
+  demographicDropdownOpen,
+  setDemographicDropdownOpen,
+  setDemographicType,
+}) => {
   // Sample data for the demographics
+  const [showAllCountries, setShowAllCountries] = useState(false);
   const countries = [
     { name: "India", flag: "🇮🇳", percentage: 40, color: "bg-indigo-500" },
     { name: "USA", flag: "🇺🇸", percentage: 25, color: "bg-amber-500" },
     { name: "CANADA", flag: "🇨🇦", percentage: 10, color: "bg-amber-200" },
     { name: "UAE", flag: "🇦🇪", percentage: 7, color: "bg-emerald-500" },
   ];
+  const currentData = mockData[demographicType]?.demographicsData || {};
+  const allDemographics = Object.entries(currentData).map(
+    ([country, percentage], index) => {
+      // Define a set of colors for the bars
+      const colors = [
+        "bg-purple-600",
+        "bg-orange-500",
+        "bg-red-500",
+        "bg-green-500",
+        "bg-blue-500",
+        "bg-yellow-500",
+        "bg-pink-500",
+        "bg-indigo-500",
+      ];
+      // Get corresponding flag emoji
+      const flagEmojis = {
+        India: "🇮🇳",
+        USA: "🇺🇸",
+        CANADA: "🇨🇦",
+        UAE: "🇦🇪",
+        UK: "🇬🇧",
+        Australia: "🇦🇺",
+        Germany: "🇩🇪",
+        France: "🇫🇷",
+      };
+
+      return {
+        country,
+        percentage,
+        color: colors[index % colors.length],
+        flag: flagEmojis[country] || country.substring(0, 2),
+      };
+    }
+  );
+  const selectedOption =
+    demographicOptions.find((opt) => opt.value === demographicType)?.label ||
+    "Visitors";
+  const displayDemographics = showAllCountries
+    ? allDemographics
+    : allDemographics.slice(0, 4);
 
   return (
     <div className="bg-black text-white p-6 rounded-xl w-full max-w-3xl">
-      <div className="border-[#1D1D1D] border-b pb-4">
+      <div className="border-[]">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Demographics</h2>
           <div className="relative">
-            <div className="bg-black bg-opacity-40 border border-gray-700 rounded-full px-4 py-1 flex items-center">
-              <span className="mr-2">Visitors</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
+            <Dropdown
+              options={demographicOptions}
+              selected={selectedOption}
+              onChange={setDemographicType}
+              isOpen={demographicDropdownOpen}
+              onToggle={() =>
+                setDemographicDropdownOpen(!demographicDropdownOpen)
+              }
+            />
           </div>
         </div>
         <div className="flex mb-4">
@@ -93,7 +134,7 @@ const DemographicsCard = () => {
         ))}
       </div> */}
         <div className="space-y-4">
-          {countries.map((country, index) => (
+          {displayDemographics.map((country, index) => (
             <div key={index} className="flex items-center">
               <div className="w-12 h-8 border border-gray-700 rounded-md flex items-center justify-center mr-4">
                 {getFlag(country.flag)}

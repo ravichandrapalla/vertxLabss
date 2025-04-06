@@ -8,7 +8,7 @@ import { RiLineChartLine } from "react-icons/ri";
 
 const BottomNavigation = ({ isActive = true }) => {
   return (
-    <div className="flex items-center justify-around py-3 bg-black border-t border-gray-800">
+    <div className="flex items-center justify-around py-3 bg-black border-t border-gray-800 md:hidden">
       <Link
         to="/dashboard"
         className={`flex flex-col items-center ${

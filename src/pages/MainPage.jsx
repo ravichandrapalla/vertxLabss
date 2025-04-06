@@ -15,6 +15,7 @@ import VisiorsGraphCard from "../components/graphs/VisitorsGraphCard";
 
 import InsightsCard from "../components/graphs/InsightsCard";
 import DemographicsCard from "../components/graphs/DemoGraphicsCard";
+import { useSelector } from "react-redux";
 
 const mockData = {
   visitors: {
@@ -75,6 +76,18 @@ const mockData = {
       UK: 5,
       Australia: 3,
     },
+    insights: {
+      founders: {
+        total: "7.4K",
+        growth: "+420%",
+        valueChange: "(840)",
+      },
+      investors: {
+        total: "6.09K",
+        growth: "+380%",
+        valueChange: "(720)",
+      },
+    },
   },
   connections: {
     total: 3490,
@@ -133,6 +146,18 @@ const mockData = {
       UAE: 8,
       UK: 7,
       Australia: 4,
+    },
+    insights: {
+      founders: {
+        total: "4.2K",
+        growth: "+210%",
+        valueChange: "(375)",
+      },
+      investors: {
+        total: "3.7K",
+        growth: "+170%",
+        valueChange: "(310)",
+      },
     },
   },
   interactions: {
@@ -193,6 +218,18 @@ const mockData = {
       UK: 8,
       Australia: 5,
     },
+    insights: {
+      founders: {
+        total: "5.8K",
+        growth: "+150%",
+        valueChange: "(420)",
+      },
+      investors: {
+        total: "4.9K",
+        growth: "+130%",
+        valueChange: "(355)",
+      },
+    },
   },
   impressions: {
     total: 8700,
@@ -252,6 +289,18 @@ const mockData = {
       UK: 6,
       Australia: 4,
     },
+    insights: {
+      founders: {
+        total: "8.1K",
+        growth: "+290%",
+        valueChange: "(850)",
+      },
+      investors: {
+        total: "7.2K",
+        growth: "+230%",
+        valueChange: "(690)",
+      },
+    },
   },
 };
 const mockCountriesData = {
@@ -263,6 +312,7 @@ const mockCountriesData = {
   Australia: 7.3,
 };
 const MainPage = () => {
+  const { activeTab } = useSelector((state) => state.activeTab);
   const [metricType, setMetricType] = useState("visitors");
   const [timeRange, setTimeRange] = useState("last30days");
   const [insightType, setInsightType] = useState("visitors");
@@ -391,44 +441,87 @@ const MainPage = () => {
     { label: "Interactions", value: "interactions" },
     { label: "Impressions", value: "impressions" },
   ];
+  const getActiveTab = () => {
+    if (activeTab === "Overview") {
+      return (
+        <div className="flex flex-col space-y-4 min-h-screen w-screen bg-[#1D1D1D] text-white p-4">
+          <div className=" max-h-[270px] rounded-2xl overflow-hidden bg-[#000000] ">
+            <VisiorsGraphCard
+              metricType={metricType}
+              setMetricType={setMetricType}
+              timeRange={timeRange}
+              setTimeRange={setTimeRange}
+              metricOptions={metricOptions}
+              timeOptions={timeOptions}
+              addOptions={addOptions}
+              showComparison={showComparison}
+              comparisonMetric={comparisonMetric}
+              currentMetricData={currentMetricData}
+              currentComparisonData={currentComparisonData}
+              mockData={mockData}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              metricDropdownOpen={metricDropdownOpen}
+              setMetricDropdownOpen={setMetricDropdownOpen}
+              timeDropdownOpen={timeDropdownOpen}
+              setTimeDropdownOpen={setTimeDropdownOpen}
+              addDropdownOpen={addDropdownOpen}
+              setAddDropdownOpen={setAddDropdownOpen}
+              handleAddComparison={handleAddComparison}
+              removeComparison={removeComparison}
+            />
+          </div>
+          <div className=" max-h-[180px] rounded-2xl overflow-hidden bg-[#000000] ">
+            <InsightsCard
+              insightType={insightType}
+              setInsightType={setInsightType}
+              insightOptions={metricOptions}
+              insightDropdownOpen={insightDropdownOpen}
+              setInsightDropdownOpen={setInsightDropdownOpen}
+              mockData={mockData}
+            />
+          </div>
+          <div className=" max-h-[572px] rounded-2xl overflow-hidden bg-[#000000] ">
+            <DemographicsCard
+              demographicType={demographicType}
+              setDemographicType={setDemographicType}
+              demographicOptions={metricOptions}
+              demographicDropdownOpen={demographicDropdownOpen}
+              setDemographicDropdownOpen={setDemographicDropdownOpen}
+              mockData={mockData}
+            />
+          </div>
+        </div>
+      );
+    }
+    if (activeTab === "Reports") {
+      return (
+        <div className="flex items-center justify-center   text-white">
+          <p>{`${activeTab} coming soon`}</p>
+        </div>
+      );
+    }
+    if (activeTab === "Demographics") {
+      return (
+        <div className="flex flex-col space-y-4 min-h-screen w-screen bg-[#1D1D1D] text-white p-4">
+          {" "}
+          <div className=" max-h-[572px] rounded-2xl overflow-hidden bg-[#000000] ">
+            <DemographicsCard
+              demographicType={demographicType}
+              setDemographicType={setDemographicType}
+              demographicOptions={metricOptions}
+              demographicDropdownOpen={demographicDropdownOpen}
+              setDemographicDropdownOpen={setDemographicDropdownOpen}
+              mockData={mockData}
+            />
+          </div>
+        </div>
+      );
+    }
+  };
   return (
     //Visiors card jsx
-    <>
-      <div className="flex flex-col space-y-4 min-h-screen w-screen bg-[#1D1D1D] text-white p-4">
-        <div className=" max-h-[270px] rounded-2xl overflow-hidden bg-[#000000] ">
-          <VisiorsGraphCard
-            metricType={metricType}
-            setMetricType={setMetricType}
-            timeRange={timeRange}
-            setTimeRange={setTimeRange}
-            metricOptions={metricOptions}
-            timeOptions={timeOptions}
-            addOptions={addOptions}
-            showComparison={showComparison}
-            comparisonMetric={comparisonMetric}
-            currentMetricData={currentMetricData}
-            currentComparisonData={currentComparisonData}
-            mockData={mockData}
-            primaryColor={primaryColor}
-            secondaryColor={secondaryColor}
-            metricDropdownOpen={metricDropdownOpen}
-            setMetricDropdownOpen={setMetricDropdownOpen}
-            timeDropdownOpen={timeDropdownOpen}
-            setTimeDropdownOpen={setTimeDropdownOpen}
-            addDropdownOpen={addDropdownOpen}
-            setAddDropdownOpen={setAddDropdownOpen}
-            handleAddComparison={handleAddComparison}
-            removeComparison={removeComparison}
-          />
-        </div>
-        <div className=" max-h-[180px] rounded-2xl overflow-hidden bg-[#000000] ">
-          <InsightsCard />
-        </div>
-        <div className=" max-h-[572px] rounded-2xl overflow-hidden bg-[#000000] ">
-          <DemographicsCard />
-        </div>
-      </div>
-    </>
+    <>{getActiveTab()}</>
   );
 };
 
