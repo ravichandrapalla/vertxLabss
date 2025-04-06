@@ -16,7 +16,7 @@ const InsightsCard = ({
   // Get the current data
   const currentData = mockData[insightType];
   return (
-    <div className="bg-black text-white pt-4 px-4 rounded-xl w-full max-w-md">
+    <div className="bg-black text-white pt-4 px-4 rounded-xl w-full h-full max-w-md">
       <div className="pb-2 border-[#1D1D1D] border-b">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg ">Insights</h2>

@@ -7,7 +7,7 @@ const TabNavigation = () => {
   const dispatch = useDispatch();
   console.log("tab nav", activeTab);
   return (
-    <div className="border-b border-gray-800">
+    <div className="border-b border-gray-800 md:hidden">
       <div className="flex">
         {["Overview", "Reports", "Demographics"].map((tab) => (
           <button

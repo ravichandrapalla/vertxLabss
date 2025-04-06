@@ -15,7 +15,9 @@ import VisiorsGraphCard from "../components/graphs/VisitorsGraphCard";
 
 import InsightsCard from "../components/graphs/InsightsCard";
 import DemographicsCard from "../components/graphs/DemoGraphicsCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import TabsContainer from "../components/TabsContainer";
+import { setActiveTab } from "../redux/slices/activeTabSlice";
 
 const mockData = {
   visitors: {
@@ -340,6 +342,7 @@ const MainPage = () => {
   // Colors for charts
   const [primaryColor, setPrimaryColor] = useState("#fff");
   const [secondaryColor, setSecondaryColor] = useState("#9333EA");
+  const dispatch = useDispatch();
 
   // Update primary metric data when selection changes
   useEffect(() => {
@@ -444,7 +447,7 @@ const MainPage = () => {
   const getActiveTab = () => {
     if (activeTab === "Overview") {
       return (
-        <div className="flex flex-col space-y-4 min-h-screen w-screen bg-[#1D1D1D] text-white p-4">
+        <div className="flex flex-col space-y-4 md:space-x-4 h-screen w-full bg-[#1D1D1D] text-white p-4 md:grid md:grid-cols-[612px_1fr] md:grid-rows-[273px_296px] md:h-[100vh-50px] md:w-[100vw-240px]">
           <div className=" max-h-[270px] rounded-2xl overflow-hidden bg-[#000000] ">
             <VisiorsGraphCard
               metricType={metricType}
@@ -471,7 +474,7 @@ const MainPage = () => {
               removeComparison={removeComparison}
             />
           </div>
-          <div className=" max-h-[180px] rounded-2xl overflow-hidden bg-[#000000] ">
+          <div className="h-[180px] rounded-2xl overflow-hidden bg-[#000000] md:h-[94%] w-full">
             <InsightsCard
               insightType={insightType}
               setInsightType={setInsightType}
@@ -481,7 +484,7 @@ const MainPage = () => {
               mockData={mockData}
             />
           </div>
-          <div className=" max-h-[572px] rounded-2xl overflow-hidden bg-[#000000] ">
+          <div className=" max-h-[572px] rounded-2xl overflow-hidden bg-[#000000] md:col-span-2">
             <DemographicsCard
               demographicType={demographicType}
               setDemographicType={setDemographicType}
@@ -521,7 +524,16 @@ const MainPage = () => {
   };
   return (
     //Visiors card jsx
-    <>{getActiveTab()}</>
+    <div className="h-full w-full ">
+      <div className="hidden md:block">
+        <TabsContainer
+          activeTab={activeTab}
+          setActiveTab={(tab) => dispatch(setActiveTab(tab))}
+        />
+      </div>
+
+      {getActiveTab()}
+    </div>
   );
 };
 
