@@ -10,10 +10,10 @@ const Dropdown = ({
   className = "",
 }) => {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${className} mr-2`}>
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
+        className="flex items-center justify-start gap-2 px-2 py-2 bg-[#080808] text-white text-xs rounded-2xl"
       >
         <span>{selected || label}</span>
         <ChevronDown
@@ -23,11 +23,11 @@ const Dropdown = ({
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-48 bg-gray-800 rounded-md shadow-lg">
+        <div className="absolute z-10 mt-1 w-48 bg-[#1D1D1D] rounded-2xl shadow-lg">
           {options.map((option) => (
             <button
               key={option.value}
-              className="block w-full text-left px-4 py-2 text-white hover:bg-gray-700"
+              className="block w-full text-left px-4 py-2 hover:bg-gray-700  "
               onClick={() => {
                 onChange(option.value);
                 onToggle();
