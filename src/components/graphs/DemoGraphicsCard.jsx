@@ -1,166 +1,118 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { IoChevronDown } from "react-icons/io5";
+import { IN, US, CA, AE } from "country-flag-icons/react/3x2";
+// import World from "../../assets/World.png";
+import Legend from "../ui/Legend";
+import Dropdown from "../ui/Dropdown";
 
-const DemographicsCard = ({ visitorType = 'Visitors' }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [countryData, setCountryData] = useState([
-    { country: "India", percentage: 40, color: "#FF9933" },
-    { country: "USA", percentage: 25, color: "#3C3B6E" },
-    { country: "CANADA", percentage: 10, color: "#FF0000" },
-    { country: "UAE", percentage: 7, color: "#00732F" }
-  ]);
-  
-  // Update countries based on the selected visitor type (mock dynamic behavior)
-  useEffect(() => {
-    if (visitorType === 'Connections') {
-      setCountryData([
-        { country: "India", percentage: 35, color: "#FF9933" },
-        { country: "USA", percentage: 30, color: "#3C3B6E" },
-        { country: "CANADA", percentage: 15, color: "#FF0000" },
-        { country: "UAE", percentage: 10, color: "#00732F" }
-      ]);
-    } else if (visitorType === 'Interactions') {
-      setCountryData([
-        { country: "India", percentage: 45, color: "#FF9933" },
-        { country: "USA", percentage: 20, color: "#3C3B6E" },
-        { country: "CANADA", percentage: 12, color: "#FF0000" },
-        { country: "UAE", percentage: 8, color: "#00732F" }
-      ]);
-    } else {
-      setCountryData([
-        { country: "India", percentage: 40, color: "#FF9933" },
-        { country: "USA", percentage: 25, color: "#3C3B6E" },
-        { country: "CANADA", percentage: 10, color: "#FF0000" },
-        { country: "UAE", percentage: 7, color: "#00732F" }
-      ]);
-    }
-  }, [visitorType]);
-  
-  return (
-    <div className="bg-black rounded-xl p-4 text-white">
-      <div className="mb-4">
-        <h2 className="text-xl font-bold">Demographics</h2>
-      </div>
-      
-      <div className="relative mb-4">
-        <button 
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="bg-zinc-900 text-white py-2 px-4 rounded-full flex items-center justify-between"
-        >
-          {visitorType}
-          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-        
-        {isDropdownOpen && (
-          <div className="absolute top-full left-0 mt-1 w-40 bg-zinc-900 rounded-lg shadow-lg z-10">
-            <div className="py-1">
-              <button 
-                className="block w-full text-left px-4 py-2 hover:bg-zinc-800"
-                onClick={() => {
-                  setIsDropdownOpen(false);
-                }}
-              >
-                Visitors
-              </button>
-              <button 
-                className="block w-full text-left px-4 py-2 hover:bg-zinc-800"
-                onClick={() => {
-                  setIsDropdownOpen(false);
-                }}
-              >
-                Connections
-              </button>
-              <button 
-                className="block w-full text-left px-4 py-2 hover:bg-zinc-800"
-                onClick={() => {
-                  setIsDropdownOpen(false);
-                }}
-              >
-                Interactions
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-      
-      <div className="mb-4 relative">
-        <div className="w-full h-48 relative flex items-center justify-center">
-          {/* World map using dotted pattern */}
-          <div className="absolute inset-0 opacity-60">
-            <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-              <g fill="#333">
-                {/* Generate a pattern of dots resembling a world map */}
-                {Array.from({ length: 200 }).map((_, i) => (
-                  <circle 
-                    key={i} 
-                    cx={Math.random() * 1000} 
-                    cy={Math.random() * 500} 
-                    r="2" 
-                  />
-                ))}
-              </g>
-              
-              {/* Colored dots for countries */}
-              <circle cx="750" cy="230" r="6" fill={countryData[0].color} />
-              <circle cx="250" cy="200" r="6" fill={countryData[1].color} />
-              <circle cx="200" cy="150" r="6" fill={countryData[2].color} />
-              <circle cx="580" cy="220" r="6" fill={countryData[3].color} />
-            </svg>
-          </div>
+// Extended demographics data
+const allDemographics = [
+  { country: "India", percentage: 40, color: "bg-purple-600", flag: "🇮🇳" },
+  { country: "USA", percentage: 25, color: "bg-orange-500", flag: "🇺🇸" },
+  { country: "CANADA", percentage: 10, color: "bg-red-500", flag: "🇨🇦" },
+  { country: "UAE", percentage: 7, color: "bg-green-500", flag: "🇦🇪" },
+  { country: "UK", percentage: 5, color: "bg-blue-500", flag: "🇬🇧" },
+  { country: "Australia", percentage: 4, color: "bg-yellow-500", flag: "🇦🇺" },
+  { country: "Germany", percentage: 3, color: "bg-pink-500", flag: "🇩🇪" },
+  { country: "France", percentage: 2, color: "bg-indigo-500", flag: "🇫🇷" },
+];
+
+const getFlag = (param) => {
+  switch (param) {
+    case "🇮🇳":
+      return <IN title="India" className="w-8 h-8 rounded" />;
+    case "🇺🇸":
+      return <US title="United States" className="w-8 h-8 rounded" />;
+    case "🇨🇦":
+      return <CA title="Canada" className="w-8 h-8 rounded" />;
+    case "🇦🇪":
+      return <AE title="United Arab Emirates" className="w-8 h-8 rounded" />;
+    default:
+      // For other countries, return a generic flag representation
+      return (
+        <div className="w-8 h-6 bg-gray-600 rounded flex items-center justify-center">
+          {param}
         </div>
-        
-        <div className="absolute bottom-2 left-2 flex space-x-3">
-          {countryData.map((item, index) => (
-            <div key={index} className="flex items-center">
-              <div className="w-3 h-3 rounded-full mr-1" style={{ backgroundColor: item.color }}></div>
-              <span className="text-xs">{item.country}</span>
+      );
+  }
+};
+
+const DemoGraphics = () => {
+  const [visitorType, setVisitorType] = useState("Visitors");
+  const [showAllCountries, setShowAllCountries] = useState(false);
+
+  // Display top 4 countries or all countries based on showAllCountries
+  const displayDemographics = showAllCountries
+    ? allDemographics
+    : allDemographics.slice(0, 4);
+
+  const dropdownOptions = {
+    visitors: ["Visitors", "Connections", "Interactions", "Impressions"],
+  };
+
+  return (
+    <div className="p-4 flex flex-col min-h-[calc(100vh-145px)] md:col-span-2 md:flex-row items-center justify-between gap-5 bg-black rounded-xl overflow-hidden">
+      {/* World Map Section */}
+      <div className="md:w-[66.5%]  flex flex-col bg-[#000000] rounded-lg items-start justify-start">
+        <div className="m-6 flex flex-col items-start gap-4 w-full ">
+          <p className="text-xl font-semibold">Demographics</p>
+          <Dropdown
+            options={dropdownOptions.visitors}
+            selected={visitorType}
+            setSelected={setVisitorType}
+          />
+        </div>
+        <img
+          src={World}
+          alt="World Map"
+          className="w-full h-full px-6 rounded-lg"
+        />
+        <Legend />
+      </div>
+
+      {/* Country Data */}
+      <div className="w-full md:w-[32.5%] flex flex-col flex-grow p-4 ">
+        <div className="flex flex-col border-[#1D1D1D] border-b-1 pb-2 max-h-64 overflow-y-auto">
+          {displayDemographics.map(({ country, percentage, color, flag }) => (
+            <div
+              key={country}
+              className="flex items-center justify-between w-full mb-3 gap-2"
+            >
+              <div className="">{getFlag(flag)}</div>
+              <div className="w-full">
+                <div className="flex justify-between items-center">
+                  <span className="flex items-center space-x-2">
+                    <span>{country}</span>
+                  </span>
+                  <span className="text-sm">{percentage}%</span>
+                </div>
+                <div className="bg-gray-700 h-2 rounded-md mt-1">
+                  <div
+                    className={`${color} h-2 rounded-md`}
+                    style={{ width: `${percentage}%` }}
+                  ></div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
-      </div>
-      
-      <div className="space-y-3">
-        {countryData.map((item, index) => (
-          <div key={index} className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img 
-                src={`/flags/${item.country.toLowerCase()}.png`} 
-                alt={`${item.country} flag`}
-                className="w-6 h-4 mr-2"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/api/placeholder/24/16";
-                }}
-              />
-              <span className="font-medium">{item.country}</span>
+        <div className="flex items-center justify-end">
+          <button
+            className="mt-2 flex items-center justify-end space-x-2 text-blue-400 "
+            onClick={() => setShowAllCountries(!showAllCountries)}
+          >
+            <div className="flex items-center space-x-6">
+              <span>
+                {showAllCountries ? "Show less" : "View all countries"}
+              </span>
+              <FaArrowRight />
             </div>
-            <div className="flex items-center">
-              <div className="w-24 h-2 bg-gray-700 rounded-full mr-2 overflow-hidden">
-                <div 
-                  className="h-full rounded-full" 
-                  style={{ 
-                    width: `${item.percentage}%`, 
-                    backgroundColor: item.color 
-                  }}
-                ></div>
-              </div>
-              <span className="text-sm">{item.percentage}%</span>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <div className="mt-4 flex justify-end">
-        <button className="flex items-center text-sm">
-          View all countries
-          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default DemographicsCard;
+export default DemoGraphics;

@@ -13,6 +13,8 @@ import { ChevronDown, Plus } from "lucide-react";
 import MetricsChart from "../components/graphs/MatricsChart";
 import VisiorsGraphCard from "../components/graphs/VisitorsGraphCard";
 
+import InsightsCard from "../components/graphs/InsightsCard";
+
 const mockData = {
   visitors: {
     total: 13490,
@@ -251,7 +253,14 @@ const mockData = {
     },
   },
 };
-
+const mockCountriesData = {
+  India: 23.5,
+  USA: 18.2,
+  CANADA: 12.7,
+  UAE: 9.4,
+  UK: 8.6,
+  Australia: 7.3,
+};
 const MainPage = () => {
   const [metricType, setMetricType] = useState("visitors");
   const [timeRange, setTimeRange] = useState("last30days");
@@ -384,8 +393,8 @@ const MainPage = () => {
   return (
     //Visiors card jsx
     <>
-      <div className="flex flex-col h-screen w-screen bg-[#1D1D1D] text-white p-4">
-        <div className="h-[300px] max-h-[300px] rounded-2xl overflow-hidden bg-[#000000] ">
+      <div className="flex flex-col space-y-4 h-screen w-screen bg-[#1D1D1D] text-white p-4">
+        <div className="h-[270px] max-h-[270px] rounded-2xl overflow-hidden bg-[#000000] ">
           <VisiorsGraphCard
             metricType={metricType}
             setMetricType={setMetricType}
@@ -410,6 +419,9 @@ const MainPage = () => {
             handleAddComparison={handleAddComparison}
             removeComparison={removeComparison}
           />
+        </div>
+        <div className="h-[180px] max-h-[180px] rounded-2xl overflow-hidden bg-[#000000] ">
+          <InsightsCard />
         </div>
       </div>
     </>
