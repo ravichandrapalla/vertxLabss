@@ -32,7 +32,7 @@ const GlobalLayout = ({ children }) => {
 
       {/* Main Content */}
 
-      <div className="flex-1 overflow-y-auto md:h-[100vh-100px] md:w-[100vw-240px]">
+      <div className="flex-1 overflow-y-auto md:h-[100vh-100px] bg-amber-500 md:w-[100vw-240px]">
         {children}
       </div>
 
