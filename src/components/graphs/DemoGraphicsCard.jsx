@@ -82,7 +82,7 @@ const DemographicsCard = ({
 
   return (
     <div className="bg-black text-white p-6 rounded-xl w-full max-w-3xl md:max-w-full">
-      <div className="relative md:flex ">
+      <div className="relative md:flex  md:h-[calc(100vh-166px)]">
         <div className="flex justify-between items-center mb-6 md:flex-col md:items-start md:space-y-2 md:absolute md:top-[0%] md:z-50 md:left-0">
           <h2 className="text-2xl font-bold">Demographics</h2>
           <div className="relative">
@@ -97,13 +97,13 @@ const DemographicsCard = ({
             />
           </div>
         </div>
-        <div className="flex mb-4 md:w-[80%]  ">
-          <div className="w-full h-full bg-dots ">
+        <div className="flex mb-4 md:w-[80%] md:max-h-full  md:items-center">
+          <div className="md:m-2 bg-dots ">
             <img src={World} alt="world map" />
           </div>
         </div>
 
-        <div className="space-y-4  md:w-[50%] md:border-[#1D1D1D] md:border-b">
+        <div className="space-y-4  md:w-[50%] md:border-[#1D1D1D] md:border-b  ">
           {displayDemographics.map((country, index) => (
             <div key={index} className="flex items-center">
               <div className="w-12 h-8 border border-gray-700 rounded-md flex items-center justify-center mr-4">
