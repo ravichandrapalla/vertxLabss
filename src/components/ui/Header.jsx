@@ -22,12 +22,12 @@ const Header = () => {
           <SlOptionsVertical className="w-6 h-6" />
         </button>
       </div>
-      <div className="hidden md:flex w-[18.75%] h-full items-center justify-around border-[#1D1D1D] border-r">
-        <div className="flex items-center justify-center ">
+      <div className="hidden md:flex w-[18%] h-full items-center justify-around border-[#1D1D1D] border-r">
+        <div className="flex items-center justify-center w-[30px]">
           <img src={Logo} width="30px" height="30px" alt="Logo" />
         </div>
-        <div className="flex items-center w-52 justify-center">
-          <span className="text-white font-medium">Vertxlabs, Inc</span>
+        <div className="flex items-center w-[190px] justify-start ">
+          <span className="text-white font-medium px-10">Vertxlabs, Inc</span>
         </div>
       </div>
       <div className="hidden md:flex flex-grow items-center justify-between">

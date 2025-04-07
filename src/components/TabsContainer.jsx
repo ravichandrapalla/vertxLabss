@@ -26,7 +26,7 @@ const TabsContainer = ({ activeTab, setActiveTab }) => {
       </div>
 
       {/* Right Tab */}
-      <div className="hidden md:flex items-center justify-center md:border-l border-[#1D1D1D] w-30">
+      <div className="hidden md:flex items-center justify-center md:border-l border-[#1D1D1D] w-33">
         <div
           className={`flex items-center justify-center p-4 cursor-pointer
         ${activeTab === "More" ? "md:text-white" : ""}
@@ -34,7 +34,7 @@ const TabsContainer = ({ activeTab, setActiveTab }) => {
       `}
           onClick={() => setActiveTab("More")}
         >
-          <p>More</p>
+          <p className="">More</p>
         </div>
       </div>
     </section>
