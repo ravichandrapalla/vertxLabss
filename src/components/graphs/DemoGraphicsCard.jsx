@@ -81,9 +81,9 @@ const DemographicsCard = ({
     : allDemographics.slice(0, 4);
 
   return (
-    <div className="bg-black text-white p-6 rounded-xl w-full max-w-3xl">
-      <div className="border-[]">
-        <div className="flex justify-between items-center mb-6">
+    <div className="bg-black text-white p-6 rounded-xl w-full max-w-3xl md:max-w-full">
+      <div className="relative md:flex ">
+        <div className="flex justify-between items-center mb-6 md:flex-col md:items-start md:space-y-2 md:absolute md:top-[0%] md:z-50 md:left-0">
           <h2 className="text-2xl font-bold">Demographics</h2>
           <div className="relative">
             <Dropdown
@@ -97,43 +97,13 @@ const DemographicsCard = ({
             />
           </div>
         </div>
-        <div className="flex mb-4">
-          <div className="relative w-full h-40">
-            {/* Placeholder for world map - replace with your actual map image */}
-            <div className="absolute inset-0 ">
-              {/* This represents the dotted world map */}
-              <div className="w-full h-full bg-dots">
-                <img src={World} alt="world map" />
-              </div>
-            </div>
-
-            {/* Location markers */}
-            {/* <div className="absolute top-1/4 left-1/3">
-            <div className="w-3 h-3 rounded-full bg-indigo-500"></div>
-          </div>
-          <div className="absolute top-1/3 left-1/5">
-            <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-          </div>
-          <div className="absolute top-1/4 left-1/5">
-            <div className="w-3 h-3 rounded-full bg-amber-200"></div>
-          </div>
-          <div className="absolute top-1/3 left-2/5">
-            <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-          </div> */}
+        <div className="flex mb-4 md:w-[80%]  ">
+          <div className="w-full h-full bg-dots ">
+            <img src={World} alt="world map" />
           </div>
         </div>
-        {/* <div className="flex space-x-2 mb-6">
-        {countries.map((country, index) => (
-          <div
-            key={index}
-            className="flex items-center bg-black bg-opacity-40 border border-gray-700 rounded-full px-4 py-1"
-          >
-            <div className={`w-3 h-3 rounded-full ${country.color} mr-2`}></div>
-            <span>{country.name}</span>
-          </div>
-        ))}
-      </div> */}
-        <div className="space-y-4">
+
+        <div className="space-y-4  md:w-[50%] md:border-[#1D1D1D] md:border-b">
           {displayDemographics.map((country, index) => (
             <div key={index} className="flex items-center">
               <div className="w-12 h-8 border border-gray-700 rounded-md flex items-center justify-center mr-4">
@@ -156,7 +126,19 @@ const DemographicsCard = ({
         </div>
       </div>
 
-      <div className="flex justify-end mt-6">
+      <div className="hidden md:absolute md:z-50 md:bottom-14 md:flex space-x-2">
+        {countries.map((country, index) => (
+          <div
+            key={index}
+            className="flex items-center bg-black bg-opacity-40 border border-gray-700 rounded-full px-4 py-1"
+          >
+            <div className={`w-3 h-3 rounded-full ${country.color} mr-2`}></div>
+            <span>{country.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-end mt-6 md:mt-3">
         <button className="flex items-center text-sm text-gray-400 hover:text-white">
           <span className="mr-2">View all countries</span>
           <svg

@@ -506,9 +506,9 @@ const MainPage = () => {
     }
     if (activeTab === "Demographics") {
       return (
-        <div className="flex flex-col space-y-4 min-h-screen w-screen bg-[#1D1D1D] text-white p-4">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-x-4 h-screen md:max-h-[calc(100vh-150px)] md:max-w-[calc(100vw-240px)]  w-screen bg-[#1D1D1D] text-white p-4">
           {" "}
-          <div className=" max-h-[572px] rounded-2xl overflow-hidden bg-[#000000] ">
+          <div className=" max-h-[572px] md:min-h-full md:min-w-full rounded-2xl overflow-hidden bg-[#000000] ">
             <DemographicsCard
               demographicType={demographicType}
               setDemographicType={setDemographicType}

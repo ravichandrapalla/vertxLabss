@@ -30,10 +30,10 @@ const InsightsCard = ({
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
-          <div>
+        <div className="flex items-center justify-between m-2 md:flex-col md:items-start">
+          <div className="w-[50%] ">
             <div className="text-sm text-gray-400 mb-1">Founders</div>
-            <div className="flex items-end">
+            <div className="flex items-end md:gap-4">
               <div className="text-2xl font-bold mr-2">
                 {currentData?.insights?.founders.total || "7.4K"}
               </div>
@@ -48,9 +48,9 @@ const InsightsCard = ({
             </div>
           </div>
 
-          <div>
+          <div className="w-[50%] ">
             <div className="text-sm text-gray-400 mb-1">Investors</div>
-            <div className="flex items-end">
+            <div className="flex items-end md:gap-4">
               <div className="text-2xl font-bold mr-2">
                 {currentData?.insights?.investors.total || "6.09K"}
               </div>
@@ -67,9 +67,9 @@ const InsightsCard = ({
         </div>
       </div>
 
-      <div className="flex justify-end p-3">
+      <div className="flex justify-end p-2 md:mt-2">
         <button className="flex items-center text-sm text-gray-400 hover:text-white">
-          <span className="mr-2">View detailed insights</span>
+          <span className="mr-2 text-xs">View detailed insights</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
