@@ -81,8 +81,8 @@ const DemographicsCard = ({
     : allDemographics.slice(0, 4);
 
   return (
-    <div className="bg-black text-white p-6 rounded-xl w-full max-w-3xl md:max-w-full">
-      <div className="relative md:flex  md:h-[calc(100vh-166px)]">
+    <div className="bg-black text-white p-6 rounded-xl w-full max-w-3xl md:max-w-full relative ">
+      <div className="relative md:flex  md:max-h-[calc(100vh-166px)]">
         <div className="flex justify-between items-center mb-6 md:flex-col md:items-start md:space-y-2 md:absolute md:top-[0%] md:z-50 md:left-0">
           <h2 className="text-2xl font-bold">Demographics</h2>
           <div className="relative">
@@ -126,7 +126,7 @@ const DemographicsCard = ({
         </div>
       </div>
 
-      <div className="hidden md:absolute md:z-50 md:bottom-14 md:flex space-x-2">
+      <div className="hidden md:absolute md:z-100 md:top-60 md:flex space-x-2">
         {countries.map((country, index) => (
           <div
             key={index}
@@ -138,7 +138,7 @@ const DemographicsCard = ({
         ))}
       </div>
 
-      <div className="flex justify-end mt-6 md:mt-3">
+      <div className="flex justify-end mt-6 md:mt-1">
         <button className="flex items-center text-sm text-gray-400 hover:text-white">
           <span className="mr-2">View all countries</span>
           <svg

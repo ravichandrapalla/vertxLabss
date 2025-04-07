@@ -447,7 +447,7 @@ const MainPage = () => {
   const getActiveTab = () => {
     if (activeTab === "Overview") {
       return (
-        <div className="flex flex-col space-y-4 md:space-x-4  w-full bg-[#1D1D1D] text-white p-4 md:grid md:grid-cols-[612px_1fr] md:grid-rows-[273px_296px] md:h-[100vh-50px] md:w-[100vw-240px]">
+        <div className="flex flex-col space-y-4 md:space-x-4 w-full bg-[#1D1D1D] text-white p-4 md:grid md:grid-cols-[612px_1fr] md:grid-rows-[273px_296px] md:h-[calc(100vh-150px)] md:w-[100vw-240px]">
           <div className=" max-h-[270px] rounded-2xl overflow-hidden bg-[#000000] ">
             <VisiorsGraphCard
               metricType={metricType}
